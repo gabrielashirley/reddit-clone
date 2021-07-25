@@ -1,6 +1,7 @@
 package com.redditclone.redditclone.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +18,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Subreddit {
     @Id
     @GeneratedValue(strategy = IDENTITY)
