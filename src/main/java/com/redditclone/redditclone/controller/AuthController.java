@@ -2,8 +2,10 @@ package com.redditclone.redditclone.controller;
 
 import com.redditclone.redditclone.dto.AuthenticationResponse;
 import com.redditclone.redditclone.dto.LoginRequest;
+import com.redditclone.redditclone.dto.RefreshTokenRequest;
 import com.redditclone.redditclone.dto.RegisterRequest;
 import com.redditclone.redditclone.service.AuthService;
+import com.redditclone.redditclone.service.RefreshTokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +20,7 @@ import static org.springframework.http.HttpStatus.OK;
 public class AuthController {
 
     private final AuthService authService;
-//    private final RefreshTokenService refreshTokenService;
+    private final RefreshTokenService refreshTokenService;
 
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) {
@@ -38,14 +40,14 @@ public class AuthController {
         return authService.login(loginRequest);
     }
 
-//    @PostMapping("/refresh/token")
-//    public AuthenticationResponse refreshTokens(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
-//        return authService.refreshToken(refreshTokenRequest);
-//    }
-//
-//    @PostMapping("/logout")
-//    public ResponseEntity<String> logout(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
-//        refreshTokenService.deleteRefreshToken(refreshTokenRequest.getRefreshToken());
-//        return ResponseEntity.status(OK).body("Refresh Token Deleted Successfully!!");
-//    }
+    @PostMapping("/refresh/token")
+    public AuthenticationResponse refreshTokens(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+        return authService.refreshToken(refreshTokenRequest);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+        refreshTokenService.deleteRefreshToken(refreshTokenRequest.getRefreshToken());
+        return ResponseEntity.status(OK).body("Refresh Token Deleted Successfully!!");
+    }
 }
