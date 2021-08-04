@@ -13,7 +13,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
 @Entity
-@Builder
+@Builder // construct the object of Vote; Builder pattern
 @AllArgsConstructor
 @NoArgsConstructor
 public class Vote {
